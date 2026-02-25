@@ -1,0 +1,31 @@
+# LiteLLM Proxy config for user-facing app with Atlassian MCP
+# See: https://docs.litellm.ai/docs/mcp_oauth and https://docs.litellm.ai/docs/mcp
+
+model_list:
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: os.environ/OPENAI_API_KEY
+
+# Atlassian MCP (Jira + Confluence) via streamable-http
+# Run mcp-atlassian separately: uvx mcp-atlassian --transport streamable-http --port 9000
+# For multi-user OAuth (Option 1 / PKCE): run with ATLASSIAN_OAUTH_ENABLE=true
+# Set ATLASSIAN_OAUTH_CLIENT_ID and ATLASSIAN_OAUTH_CLIENT_SECRET in env (never commit secret).
+mcp_servers:
+  atlassian_mcp:
+    url: "http://localhost:9000/mcp"
+    auth_type: oauth2
+    client_id: os.environ/ATLASSIAN_OAUTH_CLIENT_ID
+    client_secret: os.environ/ATLASSIAN_OAUTH_CLIENT_SECRET
+    authorization_url: "https://auth.atlassian.com/authorize"
+    token_url: "https://auth.atlassian.com/oauth/token"
+    scopes:
+      - "read:jira-work"
+      - "write:jira-work"
+      - "read:confluence-content.all"
+      - "write:confluence-content"
+      - "offline_access"
+    extra_headers:
+      - "Authorization"
+      - "X-Atlassian-Cloud-Id"
+    description: "Jira and Confluence tools (search issues, get/create/update, Confluence search/pages)"
