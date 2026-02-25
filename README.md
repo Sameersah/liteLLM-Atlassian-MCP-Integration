@@ -39,6 +39,16 @@ References:
 - [LiteLLM MCP overview](https://docs.litellm.ai/docs/mcp) and [usage](https://docs.litellm.ai/docs/mcp_usage).
 - [mcp-atlassian](https://github.com/sooperset/mcp-atlassian) and [HTTP transport](https://personal-1d37018d.mintlify.app/docs/http-transport).
 
+## Screenshots
+
+**Atlassian OAuth consent** — When you click “Connect to Atlassian”, you’re redirected to Atlassian to authorize the app (e.g. liteLLM-demo) to access Jira and Confluence on your behalf.
+
+![Atlassian OAuth consent](docs/atlassian-oauth-consent.png)
+
+**Demo app** — After connecting, set your Atlassian Cloud ID (or use “Fetch Cloud ID”), then list MCP tools and chat with the assistant using Jira/Confluence.
+
+![Demo app – Settings and MCP tools](docs/demo-app-settings.png)
+
 ## Prerequisites
 
 - **Python 3.10+** (for LiteLLM and mcp-atlassian).
